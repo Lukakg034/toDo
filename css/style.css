@@ -33,37 +33,35 @@ html {
 
 body {
   background: linear-gradient(to top, rgb(12, 51, 67), rgb(12, 16, 52));
-  /*display: flex;
-  align-items: center;
-  justify-content: center;
-  */
+
   height: 100vh;
   position: relative;
-}
-
-.book {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  margin: auto;
-  height: 40rem;
-  width: 40rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.book {
+  height: 40rem;
+  width: 40rem;
   perspective: 2500px;
   -webkit-transition: all 1s;
   -moz-transition: all 1s;
   -ms-transition: all 1s;
   -o-transition: all 1s;
   transition: all 1s;
-  transform: translate(50%, -50%);
-  box-shadow: 10px 1px 120px black;
+  box-shadow: 10px 1px 20px black;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .book.open {
-  /* right: 40%; */
-  right: calc(100vw / 2.64);
+  -webkit-transform: translate(50%, -50%);
+  -moz-transform: translate(50%, 0%);
+  -ms-transform: translate(50%, 0%);
+  -o-transform: translate(50%, 0%);
+  -webkit-transform: translate(50%, 0%);
+  transform: translate(50%, 0%);
 }
 /*Adding styles for book covers, front and back*/
 .book_cover {
@@ -99,14 +97,17 @@ body {
     position: absolute;
     background-color: var(--coverSecondary);
     z-index: -1;
-    /* width: 45rem; */
-    /* resize: both;
-    overflow: auto; */
   }
 }
 .book_cover.cover_front.turn_page {
   z-index: -1;
 }
+/* .book_cover.cover_back {
+  border-bottom-right-radius: 20px;
+}
+.cover_back {
+  border-top-right-radius: 20px;
+} */
 
 .book_cover.cover_front.turn_page {
   z-index: -1;
@@ -129,20 +130,12 @@ body {
   height: var(--pageHeight);
   width: var(--pageWidth);
   margin: 2rem 2rem 2rem 0;
-  background-color: #fff;
+  /* background-color: #fff; */
   z-index: 1;
   position: absolute;
 }
 #page_1 {
   z-index: 2;
-
-  /*transform-origin: center center;
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
-  -ms-transform: rotateY(180deg);
-  -o-transform: rotateY(180deg);
-  transform: rotateY(180deg);
-  */
 }
 .page_left {
   transform-origin: center center;
@@ -192,7 +185,11 @@ body {
 .header_primary {
   font-size: 2.8rem;
 }
+
+/*TODO Adjust colors*/
 #userInput {
+  background-color: var(--coverColor);
+  color: black;
   font-size: 1.8rem;
   margin: 2rem 0;
   padding: 1rem 2rem;
@@ -214,9 +211,9 @@ body {
   border-radius: 10px;
   cursor: pointer;
 }
-/* .btn-open {
-  position: absolute;
-} */
+.btn-add {
+  background-color: var(--coverColor);
+}
 .delBtn {
   width: 2rem;
   height: 2rem;
@@ -252,6 +249,8 @@ body {
     var(--primaryBackgroundColor)
   );
   height: var(--pageHeight);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
@@ -276,8 +275,8 @@ body {
   );
 }
 li {
-  background-color: blueviolet;
-  color: var(--coverColor);
+  background-color: var(--coverColor);
+  color: black;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -288,4 +287,23 @@ li {
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
   border-radius: 10px;
+}
+/*Initial app zoom level*/
+.zoom_level {
+  animation-name: bookZoom;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+}
+
+@keyframes bookZoom {
+  0% {
+    transform: scale(0.1);
+
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
